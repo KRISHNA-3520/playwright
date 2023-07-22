@@ -18,6 +18,7 @@ const config = {
   //mention browser,mention screenshot etc
   use: {
     browserName: "chromium",
+    headless:false
   },
 };
 
