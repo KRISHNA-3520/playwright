@@ -1,6 +1,6 @@
 const { test, expect } = require("@playwright/test");
 
-test.only("UI Controls test", async ({ browser }) => {
+test("UI Controls test", async ({ browser }) => {
   //to open fresh browser without plugins we use Context i.e. new instance of browser
   const context = await browser.newContext();
   const page = await context.newPage();
