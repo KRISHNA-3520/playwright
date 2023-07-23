@@ -19,7 +19,7 @@ const config = {
   use: {
     browserName: "chromium",
     headless:false,
-    screenshot:'on',
+    screenshot:'off',
     //trace:'on' --> for both pass and failed scenario screenshot will be captured
     //trace:'retain-on-failure' --> only failed scenario screenshot will be captured
     trace:'retain-on-failure'
