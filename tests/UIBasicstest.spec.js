@@ -1,6 +1,6 @@
 const { test, expect } = require("@playwright/test");
 
-test("Browser Context Playwright test", async ({ browser }) => {
+test.only("Browser Context Playwright test", async ({ browser }) => {
   //to open fresh browser without plugins we use Context i.e. new instance of browser
   const context = await browser.newContext();
   const page = await context.newPage();
@@ -26,15 +26,24 @@ test("Browser Context Playwright test", async ({ browser }) => {
   await expect(page.locator('[style*="block"]')).toContainText("Incorrect");
 
   //we can use fill to clear the field
-  await userName.fill("")
+  await userName.fill("");
 
   //we can use either type or fill to enter text into the field
-  await userName.fill('rahulshettyacademy')
-  await signIn.click()
+  await userName.fill("rahulshettyacademy");
+
+  await Promise.all(
+    [
+      //wait for next navigation
+      page.waitForNavigation(), 
+      signIn.click()
+    ]
+    );
 
   //we can use first() method to get first element or .nth(0)
-  console.log(await page.locator('.card-body a').first().textContent())
-  console.log(await page.locator('.card-body a').nth(1).textContent())
+  // console.log(await page.locator(".card-body a").first().textContent());
+  // console.log(await page.locator(".card-body a").nth(1).textContent());
+
+  console.log(await page.locator(".card-body a").allTextContents());
 });
 
 test("Page Playwright test", async ({ page }) => {
