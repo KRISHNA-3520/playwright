@@ -49,14 +49,28 @@ test.only("UI Controls test", async ({ browser }) => {
   await expect(documentLink).toHaveAttribute("class", "blinkingText");
 
   //handling new tab scenario
+  //new tab are returned in any array
   const [newPage] = await Promise.all([
     context.waitForEvent("page"),
     await documentLink.click(),
   ]);
 
+  const text = await newPage.locator(".red").textContent();
+  console.log(text);
   await expect(newPage.locator(".red")).toContainText(
     "Please email us at mentor@rahulshettyacademy.com with below template to receive response"
   );
+
+  // get the domain from above text
+  const emailText = text.split("@");
+  const domain = emailText[1].split(" ")[0];
+
+  console.log(domain);
+
+  //enter domain in parent tab
+  await userName.fill("")
+  await userName.type(domain);
+  await page.pause();
   //click on SignIn button
   // await signIn.click();
 });
