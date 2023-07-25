@@ -1,19 +1,35 @@
 const { test, expect } = require("@playwright/test");
 
-test("Browser Context Playwright test", async ({ page }) => {
-  const email = "kjamadar26@gmail.com";
-  const productName = "adidas original";
-  const products = page.locator(".card-body");
+let webContext;
+test.beforeAll(async ({ browser }) => {
+  const context = await browser.newContext();
+  const page = await context.newPage();
+  const email = "anshika@gmail.com";
   await page.goto("https://rahulshettyacademy.com/client");
   await page.locator("#userEmail").fill(email);
-  await page.locator("#userPassword").type("Sachin@200");
+  await page.locator("#userPassword").type("Iamking@000");
   await page.locator('[value="Login"]').click();
   //execution will till all api calls  are made
   await page.waitForLoadState("networkidle");
 
+  //store all storage data
+  await context.storageState({ path: "state.json" });
+
+  //invoke new browser and inject above json file
+  webContext = await browser.newContext({ storageState: "state.json" });
+});
+
+test("Browser Context Playwright test", async () => {
+  //initialise new page with injected json
+  const page = await webContext.newPage();
+
+  const productName = "adidas original";
+  const products = page.locator(".card-body");
+
   //allTextContents() return an array of item
   console.log(await page.locator(".card-body b").allTextContents());
 
+  await page.goto("https://rahulshettyacademy.com/client");
   //get count of products
   const count = await products.count();
 
@@ -75,7 +91,7 @@ test("Browser Context Playwright test", async ({ page }) => {
   }
 
   //verify email
- //  await expect(page.locator('.user__name [type="text"]').nth(1)).toHaveText(email)
+  // await expect(page.locator('.user__name [type="text"]').nth(1)).toHaveText(email);
 
   //click on PLACE ORDER button
   await page.locator(".action__submit").click();
@@ -110,8 +126,8 @@ test("Browser Context Playwright test", async ({ page }) => {
     }
   }
 
-  const orderIdfromDetailsPage=await page.locator('.col-text').textContent()
-  expect(orderId.includes(orderIdfromDetailsPage)).toBeTruthy()
+  const orderIdfromDetailsPage = await page.locator(".col-text").textContent();
+  expect(orderId.includes(orderIdfromDetailsPage)).toBeTruthy();
 
   await page.pause();
 });
