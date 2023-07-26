@@ -36,6 +36,31 @@ test("More Validations", async ({ page }) => {
 
   const textCheck = await framePage.locator(".text h2").textContent();
 
-  console.log(textCheck.split(" ")[1])
+  console.log(textCheck.split(" ")[1]);
+});
 
+test("Screenshot and Visual comparison", async ({ page }) => {
+  await page.goto("https://rahulshettyacademy.com/AutomationPractice/");
+
+  //check field is visible
+  await expect(page.locator("#displayed-text")).toBeVisible();
+
+  //take partial screenshot
+  await page
+    .locator("#displayed-text")
+    .screenshot({ path: "partialScreenshot.png" });
+
+  //click on hide button
+  await page.locator("#hide-textbox").click();
+
+  //take entire page screenshot
+  await page.screenshot({ path: "pageScreenshot.png" });
+
+  //check field in hidden
+  await expect(page.locator("#displayed-text")).toBeHidden();
+});
+
+test.only("Visual Testing", async ({ page }) => {
+  await page.goto("https://www.google.com");
+  expect(await page.screenshot()).toMatchSnapshot("landing.png");
 });
