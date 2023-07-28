@@ -2,6 +2,7 @@ const { expect } = require("@playwright/test");
 class CheckoutPage {
 
     constructor(page) {
+        this.page=page
         this.wait = page.locator("div li")
         this.productVisibility = page.locator('h3:has-text("adidas original")')
         this.checkOutButton = page.locator("text=Checkout")
@@ -12,15 +13,17 @@ class CheckoutPage {
         this.submit = page.locator(".action__submit")
     }
 
-    async checkoutOrder() {
-
-
+    async verifyProductIsDisplayed(productName) {
         //wait for cart page to load
         await this.wait.first().waitFor();
 
         //check whether our product is present in cart page
-        const bool = await this.productVisibility.isVisible();
+        const bool = await this.getProductLocator(productName).isVisible();
         expect(bool).toBeTruthy();
+
+    }
+
+    async checkoutOrder() {
 
         //click on Checkout button
         await this.checkOutButton.click();
@@ -60,6 +63,10 @@ class CheckoutPage {
         //click on PLACE ORDER button
         await this.submit.click();
 
+    }
+
+    getProductLocator(productName) {
+        return this.page.locator("h3:has-text('" + productName + "')")
     }
 }
 
