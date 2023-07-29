@@ -1,6 +1,8 @@
 const { test, expect } = require("@playwright/test");
 
-test("More Validations", async ({ page }) => {
+//test.describe.configure({mode:'parallel'})
+//test.describe.configure({mode:'serial'})
+test(" @Web More Validations", async ({ page }) => {
   await page.goto("https://rahulshettyacademy.com/AutomationPractice/");
 
   //await page.goto('https://www.google.com')
@@ -60,7 +62,7 @@ test("Screenshot and Visual comparison", async ({ page }) => {
   await expect(page.locator("#displayed-text")).toBeHidden();
 });
 
-test.only("Visual Testing", async ({ page }) => {
+test.skip("Visual Testing", async ({ page }) => {
   await page.goto("https://www.google.com");
   expect(await page.screenshot()).toMatchSnapshot("landing.png");
 });
