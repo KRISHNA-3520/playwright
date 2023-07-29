@@ -7,6 +7,8 @@ const config = {
   testDir: "./tests",
   //Maximum time out one test can run for.
   timeout: 30 * 1000,
+ // retries:1,
+  //workers:5,
 
   //Assertion
   expect: {
@@ -36,7 +38,7 @@ projects:[
       //trace:'retain-on-failure' --> only failed scenario screenshot will be captured
       trace:'on',
       //viewport helps to open browser in desired width and height
-      viewport:{width:720,height:720},
+     // viewport:{width:720,height:720},
 
      //run testcases on iphone device
     // ...devices['iPhone 13 Pro Max']
