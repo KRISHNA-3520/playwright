@@ -18,7 +18,7 @@ test.beforeAll(async () => {
   response = await apiUtils.createOrder(orderPayload);
 });
 
-test("Browser Context Playwright test", async ({ page }) => {
+test("@API Browser Context Playwright test", async ({ page }) => {
   page.addInitScript((value) => {
     window.localStorage.setItem("token", value);
   }, response.token);
