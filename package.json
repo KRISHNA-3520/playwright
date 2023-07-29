@@ -8,7 +8,13 @@
     "webTest": "npx playwright test --grep @Web",
     "APITest": "npx playwright test --grep @API",
     "safari": "npx playwright test --config playwright.config1.js --project=safari",
-    "chrome": "npx playwright test --config playwright.config1.js --project=chrome"
+    "chrome": "npx playwright test --config playwright.config1.js --project=chrome",
+    "cucumber-all":"npx cucumber-js",
+    "cucumber-specific":"npx cucumber-js feature/Ecommerce.feature  --exit",
+    "cucumber-tagged":"npx cucumber-js --tags '@Regression' --exit",
+    "cucumber-prallel":"npx cucumber-js features/Ecommerce.feature --parallel 2 --exit",
+    "cucumber-html":"npx cucumber-js features/Ecommerce.feature --parallel 2 --exit --format html:cucumber-report.html",
+    "cucumber-retry":" npx cucumber-js  --tags '@Regression' --retry 1 --exit --format html:cucumber-report.html "
   },
   "keywords": [],
   "author": "",
