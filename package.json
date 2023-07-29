@@ -5,10 +5,10 @@
   "main": "index.js",
   "scripts": {
     "regression": "npx playwright test",
-    "webTest":"npx playwright test --grep @Web",
-    "APITest":"npx playwright test --grep @API",
-    "safari":"npx playwright test --config playwright.config1.js --project=safari",
-    "chrome":"npx playwright test --config playwright.config1.js --project=chrome"
+    "webTest": "npx playwright test --grep @Web",
+    "APITest": "npx playwright test --grep @API",
+    "safari": "npx playwright test --config playwright.config1.js --project=safari",
+    "chrome": "npx playwright test --config playwright.config1.js --project=chrome"
   },
   "keywords": [],
   "author": "",
@@ -16,5 +16,8 @@
   "devDependencies": {
     "@playwright/test": "^1.36.2",
     "allure-playwright": "^2.4.0"
+  },
+  "dependencies": {
+    "@cucumber/cucumber": "^9.3.0"
   }
 }
