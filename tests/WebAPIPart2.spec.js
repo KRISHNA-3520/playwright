@@ -19,7 +19,7 @@ test.beforeAll(async ({ browser }) => {
   webContext = await browser.newContext({ storageState: "state.json" });
 });
 
-test("Browser Context Playwright test", async () => {
+test("@API Browser Context Playwright test", async () => {
   //initialise new page with injected json
   const page = await webContext.newPage();
 
